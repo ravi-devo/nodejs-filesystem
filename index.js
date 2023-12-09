@@ -14,6 +14,17 @@ app.post("/createFile", (req, res) => {
 
 });
 
+app.get("/getFile", (req, res) => {
+
+    fs.readdir("./File_System", (error, data) => {
+        if(error){
+            return res.status(400).send({message: "Error fetching the file", error});
+        }
+        res.status(200).send({ message: "File fetched successfully", data });
+        console.log("Data: ", data);
+    })
+})
+
 app.listen(4000, () => {
     console.log("App is running on port 4000");
 });
